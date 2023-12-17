@@ -1,0 +1,233 @@
+{
+  "imposters": [
+    {
+      "port": "8080",
+      "protocol": "http",
+      "name": "exam_QA",
+      "stubs": [
+        {
+          "predicates": [
+            {
+              "and": [
+                {
+                  "equals": {
+                    "path": "/v1/qa-exam/transfer",
+                    "method": "POST"
+                  }
+                },
+                {
+                  "matches": {
+                    "body": {
+                      "amount": 20000000,
+                      "sendingAccount": "^.*",
+                      "receivingAccount": "^.*",
+                      "receivingBankCode": "^.*"
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "responses": [
+            {
+              "is": {
+                "statusCode": 500,
+                "headers": {
+                  "Content-Type": "application/json"
+                },
+                "body": {
+                  "error": {
+                    "message": "TRANSACTION_LIMIT_DAILY"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "predicates": [
+            {
+              "and": [
+                {
+                  "equals": {
+                    "path": "/v1/qa-exam/transfer",
+                    "method": "POST"
+                  }
+                },
+                {
+                  "matches": {
+                    "body": {
+                      "amount": null,
+                      "sendingAccount": "^.*",
+                      "receivingAccount": "^.*",
+                      "receivingBankCode": "^.*"
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "responses": [
+            {
+              "is": {
+                "statusCode": 400,
+                "headers": {
+                  "Content-Type": "application/json"
+                },
+                "body": {
+                  "error": {
+                    "message": "BAD_REQUEST"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "predicates": [
+            {
+              "and": [
+                {
+                  "equals": {
+                    "path": "/v1/qa-exam/transfer",
+                    "method": "POST"
+                  }
+                },
+                {
+                  "matches": {
+                    "body": {
+                      "amount": 1000000,
+                      "sendingAccount": "^.*",
+                      "receivingAccount": "^.*",
+                      "receivingBankCode": "^.*"
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "responses": [
+            {
+              "is": {
+                "statusCode": 500,
+                "headers": {
+                  "Content-Type": "application/json"
+                },
+                "body": {
+                  "error": {
+                    "message": "TRANSACTION_LIMIT"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "predicates": [
+            {
+              "and": [
+                {
+                  "equals": {
+                    "path": "/v1/qa-exam/transfer",
+                    "method": "POST"
+                  }
+                },
+                {
+                  "matches": {
+                    "body": {
+                      "amount": 0.01,
+                      "sendingAccount": "^.*",
+                      "receivingAccount": "^.*",
+                      "receivingBankCode": "^.*"
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "responses": [
+            {
+              "is": {
+                "statusCode": 200,
+                "headers": {
+                  "Content-Type": "application/json"
+                },
+                "body": {
+                  "data": {
+                    "amount": 0.01,
+                    "sendingAccountNo": "1234567890",
+                    "receivingAccountNo": "0987654321",
+                    "receivingBankCode": "CODEVIR999",
+                    "transactionDateTime": "2023-04-24T07:59:00.873527286Z",
+                    "transferReferenceID": "XXX123"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "predicates": [
+            {
+              "and": [
+                {
+                  "equals": {
+                    "path": "/v1/qa-exam/transfer",
+                    "method": "POST"
+                  }
+                },
+                {
+                  "matches": {
+                    "body": {
+                      "amount": "^.*",
+                      "sendingAccount": "^.*",
+                      "receivingAccount": "^.*",
+                      "receivingBankCode": "^.*"
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "responses": [
+            {
+              "is": {
+                "statusCode": 200,
+                "headers": {
+                  "Content-Type": "application/json"
+                },
+                "body": {
+                  "data": {
+                    "amount": 100.1,
+                    "sendingAccountNo": "1234567890",
+                    "receivingAccountNo": "0987654321",
+                    "receivingBankCode": "CODEVIR999",
+                    "transactionDateTime": "2023-04-24T07:59:00.873527286Z",
+                    "transferReferenceID": "XXX123"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "responses": [
+            {
+              "is": {
+                "statusCode": 404,
+                "headers": {
+                  "Content-Type": "application/json"
+                },
+                "body": {
+                  "data": {
+                    "message": "API Not Found."
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

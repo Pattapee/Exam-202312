@@ -1,0 +1,717 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.1.1 (Python 3.11.2 on win32)" generated="20231217 22:40:10.787" rpa="false" schemaversion="4">
+<suite id="s1" name="API1 transfer amount" source="D:\Pattapee\Project\Gaaaaaaaaaaaa\exam202312\robot\Test\API1_transfer_amount.robot">
+<test id="s1-t1" name="Test transfer money with happy case" line="42">
+<kw name="Load Json From File" library="JSONLibrary">
+<var>${payload}</var>
+<arg>${EXECDIR}\\Resource\\Datatest\\transfer.json</arg>
+<arg>encoding=UTF-8</arg>
+<doc>Load JSON from file.</doc>
+<msg timestamp="20231217 22:40:11.494" level="INFO">${payload} = {'amount': 100.1, 'sendingAccount': '1234567890', 'receivingAccount': '0987654321', 'receivingBankCode': 'CODEVIR999'}</msg>
+<status status="PASS" starttime="20231217 22:40:11.493" endtime="20231217 22:40:11.494"/>
+</kw>
+<kw name="Request API Transfer Amount" library="API_transfer_amount">
+<var>${resp}</var>
+<arg>${payload}</arg>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>API_Transfer</arg>
+<arg>${baseurl['${ENV}']}</arg>
+<arg>timeout=30000</arg>
+<arg>verify=true</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20231217 22:40:11.496" level="INFO">Creating Session using : alias=API_Transfer, url=http://localhost:8080/v1, headers={},                     cookies={}, auth=None, timeout=30000, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20231217 22:40:11.495" endtime="20231217 22:40:11.496"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>API_Transfer</arg>
+<arg>${endpoint_transfer}</arg>
+<arg>json=${payload}</arg>
+<arg>expected_status=anything</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20231217 22:40:11.533" level="INFO">POST Request : url=http://localhost:8080/v1/qa-exam/transfer 
+ path_url=/v1/qa-exam/transfer 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate, br', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '118', 'Content-Type': 'application/json'} 
+ body=b'{"amount": 100.1, "sendingAccount": "1234567890", "receivingAccount": "0987654321", "receivingBankCode": "CODEVIR999"}' 
+ </msg>
+<msg timestamp="20231217 22:40:11.533" level="INFO">POST Response : url=http://localhost:8080/v1/qa-exam/transfer 
+ status=200, reason=OK 
+ headers={'Content-Type': 'application/json', 'Connection': 'close', 'Date': 'Sun, 17 Dec 2023 15:40:11 GMT', 'Transfer-Encoding': 'chunked'} 
+ body={
+    "data": {
+        "amount": 100.1,
+        "sendingAccountNo": "1234567890",
+        "receivingAccountNo": "0987654321",
+        "receivingBankCode": "CODEVIR999",
+        "transactionDateTime": "2023-04-24T07:59:00.873527286Z",
+        "transferReferenceID": "XXX123"
+    }
+} 
+ </msg>
+<msg timestamp="20231217 22:40:11.533" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20231217 22:40:11.496" endtime="20231217 22:40:11.533"/>
+</kw>
+<msg timestamp="20231217 22:40:11.535" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20231217 22:40:11.495" endtime="20231217 22:40:11.535"/>
+</kw>
+<kw name="Check response is happy case">
+<arg>${resp}</arg>
+<arg>${payload}</arg>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${amount}</var>
+<arg>${payload}</arg>
+<arg>$.amount</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20231217 22:40:11.559" level="INFO">${amount} = [100.1]</msg>
+<status status="PASS" starttime="20231217 22:40:11.535" endtime="20231217 22:40:11.559"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${sendingAccount}</var>
+<arg>${payload}</arg>
+<arg>$.sendingAccount</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20231217 22:40:11.574" level="INFO">${sendingAccount} = ['1234567890']</msg>
+<status status="PASS" starttime="20231217 22:40:11.559" endtime="20231217 22:40:11.574"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${receivingAccount}</var>
+<arg>${payload}</arg>
+<arg>$.receivingAccount</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20231217 22:40:11.590" level="INFO">${receivingAccount} = ['0987654321']</msg>
+<status status="PASS" starttime="20231217 22:40:11.574" endtime="20231217 22:40:11.590"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${receivingBankCode}</var>
+<arg>${payload}</arg>
+<arg>$.receivingBankCode</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20231217 22:40:11.607" level="INFO">${receivingBankCode} = ['CODEVIR999']</msg>
+<status status="PASS" starttime="20231217 22:40:11.591" endtime="20231217 22:40:11.607"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20231217 22:40:11.607" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20231217 22:40:11.607" endtime="20231217 22:40:11.607"/>
+</kw>
+<kw name="Should Be True" library="BuiltIn">
+<arg>"${response.elapsed.total_seconds()}" &lt; "0.3000"</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" starttime="20231217 22:40:11.608" endtime="20231217 22:40:11.608"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.json()['data']['amount']}</arg>
+<arg>${amount[0]}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20231217 22:40:11.608" endtime="20231217 22:40:11.609"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.json()['data']['sendingAccountNo']}</arg>
+<arg>${sendingAccount[0]}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20231217 22:40:11.609" endtime="20231217 22:40:11.610"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.json()['data']['receivingAccountNo']}</arg>
+<arg>${receivingAccount[0]}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20231217 22:40:11.610" endtime="20231217 22:40:11.610"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.json()['data']['receivingBankCode']}</arg>
+<arg>${receivingBankCode[0]}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20231217 22:40:11.610" endtime="20231217 22:40:11.611"/>
+</kw>
+<status status="PASS" starttime="20231217 22:40:11.535" endtime="20231217 22:40:11.611"/>
+</kw>
+<doc>happycase</doc>
+<tag>happycase</tag>
+<tag>regressiontest</tag>
+<tag>robot:continue-on-failure</tag>
+<status status="PASS" starttime="20231217 22:40:11.492" endtime="20231217 22:40:11.612"/>
+</test>
+<test id="s1-t2" name="TC8 - Test transfer money by amount is more than 20 million /day/person" line="51">
+<kw name="Load Json From File" library="JSONLibrary">
+<var>${payload}</var>
+<arg>${EXECDIR}\\Resource\\Datatest\\transfer.json</arg>
+<arg>encoding=UTF-8</arg>
+<doc>Load JSON from file.</doc>
+<msg timestamp="20231217 22:40:11.616" level="INFO">${payload} = {'amount': 100.1, 'sendingAccount': '1234567890', 'receivingAccount': '0987654321', 'receivingBankCode': 'CODEVIR999'}</msg>
+<status status="PASS" starttime="20231217 22:40:11.614" endtime="20231217 22:40:11.616"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${amount}</var>
+<arg>round(20000000.00, 2)</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20231217 22:40:11.616" level="INFO">${amount} = 20000000.0</msg>
+<status status="PASS" starttime="20231217 22:40:11.616" endtime="20231217 22:40:11.616"/>
+</kw>
+<kw name="Update Value To Json" library="JSONLibrary">
+<var>${payload}</var>
+<arg>${payload}</arg>
+<arg>$.amount</arg>
+<arg>${amount}</arg>
+<doc>Update value to JSON using JSONPath</doc>
+<msg timestamp="20231217 22:40:11.633" level="INFO">${payload} = {'amount': 20000000.0, 'sendingAccount': '1234567890', 'receivingAccount': '0987654321', 'receivingBankCode': 'CODEVIR999'}</msg>
+<status status="PASS" starttime="20231217 22:40:11.617" endtime="20231217 22:40:11.633"/>
+</kw>
+<kw name="Request API Transfer Amount" library="API_transfer_amount">
+<var>${resp}</var>
+<arg>${payload}</arg>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>API_Transfer</arg>
+<arg>${baseurl['${ENV}']}</arg>
+<arg>timeout=30000</arg>
+<arg>verify=true</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20231217 22:40:11.635" level="INFO">Creating Session using : alias=API_Transfer, url=http://localhost:8080/v1, headers={},                     cookies={}, auth=None, timeout=30000, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20231217 22:40:11.634" endtime="20231217 22:40:11.635"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>API_Transfer</arg>
+<arg>${endpoint_transfer}</arg>
+<arg>json=${payload}</arg>
+<arg>expected_status=anything</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20231217 22:40:11.642" level="INFO">POST Request : url=http://localhost:8080/v1/qa-exam/transfer 
+ path_url=/v1/qa-exam/transfer 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate, br', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '123', 'Content-Type': 'application/json'} 
+ body=b'{"amount": 20000000.0, "sendingAccount": "1234567890", "receivingAccount": "0987654321", "receivingBankCode": "CODEVIR999"}' 
+ </msg>
+<msg timestamp="20231217 22:40:11.642" level="INFO">POST Response : url=http://localhost:8080/v1/qa-exam/transfer 
+ status=500, reason=Internal Server Error 
+ headers={'Content-Type': 'application/json', 'Connection': 'close', 'Date': 'Sun, 17 Dec 2023 15:40:11 GMT', 'Transfer-Encoding': 'chunked'} 
+ body={
+    "error": {
+        "message": "TRANSACTION_LIMIT_DAILY"
+    }
+} 
+ </msg>
+<msg timestamp="20231217 22:40:11.642" level="INFO">${response} = &lt;Response [500]&gt;</msg>
+<status status="PASS" starttime="20231217 22:40:11.635" endtime="20231217 22:40:11.642"/>
+</kw>
+<msg timestamp="20231217 22:40:11.643" level="INFO">${resp} = &lt;Response [500]&gt;</msg>
+<status status="PASS" starttime="20231217 22:40:11.634" endtime="20231217 22:40:11.643"/>
+</kw>
+<kw name="Check response by Error message">
+<arg>${resp}</arg>
+<arg>TRANSACTION_LIMIT_DAILY</arg>
+<arg>500</arg>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>${http_status_code}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20231217 22:40:11.644" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20231217 22:40:11.643" endtime="20231217 22:40:11.644"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.json()['error']['message']}</arg>
+<arg>${error_message}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20231217 22:40:11.644" endtime="20231217 22:40:11.644"/>
+</kw>
+<status status="PASS" starttime="20231217 22:40:11.643" endtime="20231217 22:40:11.644"/>
+</kw>
+<doc>expect error response msg='TRANSACTION_LIMIT_DAILY'</doc>
+<tag>regressiontest</tag>
+<tag>robot:continue-on-failure</tag>
+<tag>TC8</tag>
+<status status="PASS" starttime="20231217 22:40:11.614" endtime="20231217 22:40:11.645"/>
+</test>
+<test id="s1-t3" name="TC9 - Test transfer money by amount is more than 1 million /transection" line="63">
+<kw name="Load Json From File" library="JSONLibrary">
+<var>${payload}</var>
+<arg>${EXECDIR}\\Resource\\Datatest\\transfer.json</arg>
+<arg>encoding=UTF-8</arg>
+<doc>Load JSON from file.</doc>
+<msg timestamp="20231217 22:40:11.648" level="INFO">${payload} = {'amount': 100.1, 'sendingAccount': '1234567890', 'receivingAccount': '0987654321', 'receivingBankCode': 'CODEVIR999'}</msg>
+<status status="PASS" starttime="20231217 22:40:11.647" endtime="20231217 22:40:11.648"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${amount}</var>
+<arg>round(1000000, 2)</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20231217 22:40:11.649" level="INFO">${amount} = 1000000</msg>
+<status status="PASS" starttime="20231217 22:40:11.649" endtime="20231217 22:40:11.649"/>
+</kw>
+<kw name="Update Value To Json" library="JSONLibrary">
+<var>${payload}</var>
+<arg>${payload}</arg>
+<arg>$.amount</arg>
+<arg>${amount}</arg>
+<doc>Update value to JSON using JSONPath</doc>
+<msg timestamp="20231217 22:40:11.665" level="INFO">${payload} = {'amount': 1000000, 'sendingAccount': '1234567890', 'receivingAccount': '0987654321', 'receivingBankCode': 'CODEVIR999'}</msg>
+<status status="PASS" starttime="20231217 22:40:11.649" endtime="20231217 22:40:11.665"/>
+</kw>
+<kw name="Request API Transfer Amount" library="API_transfer_amount">
+<var>${resp}</var>
+<arg>${payload}</arg>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>API_Transfer</arg>
+<arg>${baseurl['${ENV}']}</arg>
+<arg>timeout=30000</arg>
+<arg>verify=true</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20231217 22:40:11.667" level="INFO">Creating Session using : alias=API_Transfer, url=http://localhost:8080/v1, headers={},                     cookies={}, auth=None, timeout=30000, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20231217 22:40:11.666" endtime="20231217 22:40:11.667"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>API_Transfer</arg>
+<arg>${endpoint_transfer}</arg>
+<arg>json=${payload}</arg>
+<arg>expected_status=anything</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20231217 22:40:11.676" level="INFO">POST Request : url=http://localhost:8080/v1/qa-exam/transfer 
+ path_url=/v1/qa-exam/transfer 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate, br', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '120', 'Content-Type': 'application/json'} 
+ body=b'{"amount": 1000000, "sendingAccount": "1234567890", "receivingAccount": "0987654321", "receivingBankCode": "CODEVIR999"}' 
+ </msg>
+<msg timestamp="20231217 22:40:11.676" level="INFO">POST Response : url=http://localhost:8080/v1/qa-exam/transfer 
+ status=500, reason=Internal Server Error 
+ headers={'Content-Type': 'application/json', 'Connection': 'close', 'Date': 'Sun, 17 Dec 2023 15:40:11 GMT', 'Transfer-Encoding': 'chunked'} 
+ body={
+    "error": {
+        "message": "TRANSACTION_LIMIT"
+    }
+} 
+ </msg>
+<msg timestamp="20231217 22:40:11.676" level="INFO">${response} = &lt;Response [500]&gt;</msg>
+<status status="PASS" starttime="20231217 22:40:11.667" endtime="20231217 22:40:11.676"/>
+</kw>
+<msg timestamp="20231217 22:40:11.676" level="INFO">${resp} = &lt;Response [500]&gt;</msg>
+<status status="PASS" starttime="20231217 22:40:11.666" endtime="20231217 22:40:11.676"/>
+</kw>
+<kw name="Check response by Error message">
+<arg>${resp}</arg>
+<arg>TRANSACTION_LIMIT</arg>
+<arg>500</arg>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>${http_status_code}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20231217 22:40:11.678" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20231217 22:40:11.677" endtime="20231217 22:40:11.678"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.json()['error']['message']}</arg>
+<arg>${error_message}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20231217 22:40:11.678" endtime="20231217 22:40:11.678"/>
+</kw>
+<status status="PASS" starttime="20231217 22:40:11.677" endtime="20231217 22:40:11.678"/>
+</kw>
+<doc>expect error response msg='TRANSACTION_LIMIT'</doc>
+<tag>regressiontest</tag>
+<tag>robot:continue-on-failure</tag>
+<tag>TC9</tag>
+<status status="PASS" starttime="20231217 22:40:11.646" endtime="20231217 22:40:11.679"/>
+</test>
+<test id="s1-t4" name="TC15 - Test transfer money by amount = 0.01" line="75">
+<kw name="Load Json From File" library="JSONLibrary">
+<var>${payload}</var>
+<arg>${EXECDIR}\\Resource\\Datatest\\transfer.json</arg>
+<arg>encoding=UTF-8</arg>
+<doc>Load JSON from file.</doc>
+<msg timestamp="20231217 22:40:11.683" level="INFO">${payload} = {'amount': 100.1, 'sendingAccount': '1234567890', 'receivingAccount': '0987654321', 'receivingBankCode': 'CODEVIR999'}</msg>
+<status status="PASS" starttime="20231217 22:40:11.681" endtime="20231217 22:40:11.683"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${amount}</var>
+<arg>round(0.01, 2)</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20231217 22:40:11.684" level="INFO">${amount} = 0.01</msg>
+<status status="PASS" starttime="20231217 22:40:11.683" endtime="20231217 22:40:11.684"/>
+</kw>
+<kw name="Update Value To Json" library="JSONLibrary">
+<var>${payload}</var>
+<arg>${payload}</arg>
+<arg>$.amount</arg>
+<arg>${amount}</arg>
+<doc>Update value to JSON using JSONPath</doc>
+<msg timestamp="20231217 22:40:11.701" level="INFO">${payload} = {'amount': 0.01, 'sendingAccount': '1234567890', 'receivingAccount': '0987654321', 'receivingBankCode': 'CODEVIR999'}</msg>
+<status status="PASS" starttime="20231217 22:40:11.684" endtime="20231217 22:40:11.701"/>
+</kw>
+<kw name="Request API Transfer Amount" library="API_transfer_amount">
+<var>${resp}</var>
+<arg>${payload}</arg>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>API_Transfer</arg>
+<arg>${baseurl['${ENV}']}</arg>
+<arg>timeout=30000</arg>
+<arg>verify=true</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20231217 22:40:11.703" level="INFO">Creating Session using : alias=API_Transfer, url=http://localhost:8080/v1, headers={},                     cookies={}, auth=None, timeout=30000, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20231217 22:40:11.702" endtime="20231217 22:40:11.703"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>API_Transfer</arg>
+<arg>${endpoint_transfer}</arg>
+<arg>json=${payload}</arg>
+<arg>expected_status=anything</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20231217 22:40:11.734" level="INFO">POST Request : url=http://localhost:8080/v1/qa-exam/transfer 
+ path_url=/v1/qa-exam/transfer 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate, br', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '117', 'Content-Type': 'application/json'} 
+ body=b'{"amount": 0.01, "sendingAccount": "1234567890", "receivingAccount": "0987654321", "receivingBankCode": "CODEVIR999"}' 
+ </msg>
+<msg timestamp="20231217 22:40:11.734" level="INFO">POST Response : url=http://localhost:8080/v1/qa-exam/transfer 
+ status=200, reason=OK 
+ headers={'Content-Type': 'application/json', 'Connection': 'close', 'Date': 'Sun, 17 Dec 2023 15:40:11 GMT', 'Transfer-Encoding': 'chunked'} 
+ body={
+    "data": {
+        "amount": 0.01,
+        "sendingAccountNo": "1234567890",
+        "receivingAccountNo": "0987654321",
+        "receivingBankCode": "CODEVIR999",
+        "transactionDateTime": "2023-04-24T07:59:00.873527286Z",
+        "transferReferenceID": "XXX123"
+    }
+} 
+ </msg>
+<msg timestamp="20231217 22:40:11.734" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20231217 22:40:11.703" endtime="20231217 22:40:11.734"/>
+</kw>
+<msg timestamp="20231217 22:40:11.734" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20231217 22:40:11.702" endtime="20231217 22:40:11.734"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${payload}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20231217 22:40:11.735" endtime="20231217 22:40:11.735"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${resp.json()}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20231217 22:40:11.736" endtime="20231217 22:40:11.737"/>
+</kw>
+<kw name="Check response is happy case">
+<arg>${resp}</arg>
+<arg>${payload}</arg>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${amount}</var>
+<arg>${payload}</arg>
+<arg>$.amount</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20231217 22:40:11.756" level="INFO">${amount} = [0.01]</msg>
+<status status="PASS" starttime="20231217 22:40:11.738" endtime="20231217 22:40:11.756"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${sendingAccount}</var>
+<arg>${payload}</arg>
+<arg>$.sendingAccount</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20231217 22:40:11.773" level="INFO">${sendingAccount} = ['1234567890']</msg>
+<status status="PASS" starttime="20231217 22:40:11.756" endtime="20231217 22:40:11.773"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${receivingAccount}</var>
+<arg>${payload}</arg>
+<arg>$.receivingAccount</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20231217 22:40:11.789" level="INFO">${receivingAccount} = ['0987654321']</msg>
+<status status="PASS" starttime="20231217 22:40:11.773" endtime="20231217 22:40:11.789"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${receivingBankCode}</var>
+<arg>${payload}</arg>
+<arg>$.receivingBankCode</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20231217 22:40:11.805" level="INFO">${receivingBankCode} = ['CODEVIR999']</msg>
+<status status="PASS" starttime="20231217 22:40:11.789" endtime="20231217 22:40:11.805"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20231217 22:40:11.806" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20231217 22:40:11.806" endtime="20231217 22:40:11.806"/>
+</kw>
+<kw name="Should Be True" library="BuiltIn">
+<arg>"${response.elapsed.total_seconds()}" &lt; "0.3000"</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" starttime="20231217 22:40:11.806" endtime="20231217 22:40:11.807"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.json()['data']['amount']}</arg>
+<arg>${amount[0]}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20231217 22:40:11.807" endtime="20231217 22:40:11.807"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.json()['data']['sendingAccountNo']}</arg>
+<arg>${sendingAccount[0]}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20231217 22:40:11.807" endtime="20231217 22:40:11.809"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.json()['data']['receivingAccountNo']}</arg>
+<arg>${receivingAccount[0]}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20231217 22:40:11.809" endtime="20231217 22:40:11.809"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.json()['data']['receivingBankCode']}</arg>
+<arg>${receivingBankCode[0]}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20231217 22:40:11.809" endtime="20231217 22:40:11.810"/>
+</kw>
+<status status="PASS" starttime="20231217 22:40:11.737" endtime="20231217 22:40:11.810"/>
+</kw>
+<doc>success response and http status code 200</doc>
+<tag>regressiontest</tag>
+<tag>robot:continue-on-failure</tag>
+<tag>TC15</tag>
+<status status="PASS" starttime="20231217 22:40:11.680" endtime="20231217 22:40:11.811"/>
+</test>
+<test id="s1-t5" name="TC29 - Test Validate req field sendingAccount is null" line="89">
+<kw name="Load Json From File" library="JSONLibrary">
+<var>${payload}</var>
+<arg>${EXECDIR}\\Resource\\Datatest\\transfer.json</arg>
+<arg>encoding=UTF-8</arg>
+<doc>Load JSON from file.</doc>
+<msg timestamp="20231217 22:40:11.814" level="INFO">${payload} = {'amount': 100.1, 'sendingAccount': '1234567890', 'receivingAccount': '0987654321', 'receivingBankCode': 'CODEVIR999'}</msg>
+<status status="PASS" starttime="20231217 22:40:11.813" endtime="20231217 22:40:11.814"/>
+</kw>
+<kw name="Update Value To Json" library="JSONLibrary">
+<var>${payload}</var>
+<arg>${payload}</arg>
+<arg>$.amount</arg>
+<arg>${None}</arg>
+<doc>Update value to JSON using JSONPath</doc>
+<msg timestamp="20231217 22:40:11.831" level="INFO">${payload} = {'amount': None, 'sendingAccount': '1234567890', 'receivingAccount': '0987654321', 'receivingBankCode': 'CODEVIR999'}</msg>
+<status status="PASS" starttime="20231217 22:40:11.815" endtime="20231217 22:40:11.831"/>
+</kw>
+<kw name="Request API Transfer Amount" library="API_transfer_amount">
+<var>${resp}</var>
+<arg>${payload}</arg>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>API_Transfer</arg>
+<arg>${baseurl['${ENV}']}</arg>
+<arg>timeout=30000</arg>
+<arg>verify=true</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20231217 22:40:11.832" level="INFO">Creating Session using : alias=API_Transfer, url=http://localhost:8080/v1, headers={},                     cookies={}, auth=None, timeout=30000, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20231217 22:40:11.832" endtime="20231217 22:40:11.832"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>API_Transfer</arg>
+<arg>${endpoint_transfer}</arg>
+<arg>json=${payload}</arg>
+<arg>expected_status=anything</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20231217 22:40:11.840" level="INFO">POST Request : url=http://localhost:8080/v1/qa-exam/transfer 
+ path_url=/v1/qa-exam/transfer 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate, br', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '117', 'Content-Type': 'application/json'} 
+ body=b'{"amount": null, "sendingAccount": "1234567890", "receivingAccount": "0987654321", "receivingBankCode": "CODEVIR999"}' 
+ </msg>
+<msg timestamp="20231217 22:40:11.840" level="INFO">POST Response : url=http://localhost:8080/v1/qa-exam/transfer 
+ status=400, reason=Bad Request 
+ headers={'Content-Type': 'application/json', 'Connection': 'close', 'Date': 'Sun, 17 Dec 2023 15:40:11 GMT', 'Transfer-Encoding': 'chunked'} 
+ body={
+    "error": {
+        "message": "BAD_REQUEST"
+    }
+} 
+ </msg>
+<msg timestamp="20231217 22:40:11.840" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<status status="PASS" starttime="20231217 22:40:11.832" endtime="20231217 22:40:11.840"/>
+</kw>
+<msg timestamp="20231217 22:40:11.840" level="INFO">${resp} = &lt;Response [400]&gt;</msg>
+<status status="PASS" starttime="20231217 22:40:11.831" endtime="20231217 22:40:11.840"/>
+</kw>
+<kw name="Check response by Error message">
+<arg>${resp}</arg>
+<arg>BAD_REQUEST</arg>
+<arg>400</arg>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>${http_status_code}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20231217 22:40:11.841" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20231217 22:40:11.840" endtime="20231217 22:40:11.841"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.json()['error']['message']}</arg>
+<arg>${error_message}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20231217 22:40:11.841" endtime="20231217 22:40:11.841"/>
+</kw>
+<status status="PASS" starttime="20231217 22:40:11.840" endtime="20231217 22:40:11.841"/>
+</kw>
+<doc>error response msg ='BAD_REQUEST'</doc>
+<tag>regressiontest</tag>
+<tag>robot:continue-on-failure</tag>
+<tag>TC28</tag>
+<status status="PASS" starttime="20231217 22:40:11.812" endtime="20231217 22:40:11.842"/>
+</test>
+<test id="s1-t6" name="TC31 - Test Validate req field sendingAccount is data in 26 characters" line="100">
+<kw name="Load Json From File" library="JSONLibrary">
+<var>${payload}</var>
+<arg>${EXECDIR}\\Resource\\Datatest\\transfer.json</arg>
+<arg>encoding=UTF-8</arg>
+<doc>Load JSON from file.</doc>
+<msg timestamp="20231217 22:40:11.845" level="INFO">${payload} = {'amount': 100.1, 'sendingAccount': '1234567890', 'receivingAccount': '0987654321', 'receivingBankCode': 'CODEVIR999'}</msg>
+<status status="PASS" starttime="20231217 22:40:11.844" endtime="20231217 22:40:11.845"/>
+</kw>
+<kw name="Generate Random String" library="String">
+<var>${sendingAccount}</var>
+<arg>26</arg>
+<arg>[STRING]</arg>
+<doc>Generates a string with a desired ``length`` from the given ``chars``.</doc>
+<msg timestamp="20231217 22:40:11.846" level="INFO">${sendingAccount} = [[]RS]SIRSTS[NTSRGITG[RGSN</msg>
+<status status="PASS" starttime="20231217 22:40:11.846" endtime="20231217 22:40:11.846"/>
+</kw>
+<kw name="Update Value To Json" library="JSONLibrary">
+<var>${payload}</var>
+<arg>${payload}</arg>
+<arg>$.sendingAccount</arg>
+<arg>${sendingAccount}</arg>
+<doc>Update value to JSON using JSONPath</doc>
+<msg timestamp="20231217 22:40:11.863" level="INFO">${payload} = {'amount': 100.1, 'sendingAccount': '[[]RS]SIRSTS[NTSRGITG[RGSN', 'receivingAccount': '0987654321', 'receivingBankCode': 'CODEVIR999'}</msg>
+<status status="PASS" starttime="20231217 22:40:11.847" endtime="20231217 22:40:11.863"/>
+</kw>
+<kw name="Request API Transfer Amount" library="API_transfer_amount">
+<var>${response}</var>
+<arg>${payload}</arg>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>API_Transfer</arg>
+<arg>${baseurl['${ENV}']}</arg>
+<arg>timeout=30000</arg>
+<arg>verify=true</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20231217 22:40:11.864" level="INFO">Creating Session using : alias=API_Transfer, url=http://localhost:8080/v1, headers={},                     cookies={}, auth=None, timeout=30000, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20231217 22:40:11.863" endtime="20231217 22:40:11.864"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>API_Transfer</arg>
+<arg>${endpoint_transfer}</arg>
+<arg>json=${payload}</arg>
+<arg>expected_status=anything</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20231217 22:40:11.872" level="INFO">POST Request : url=http://localhost:8080/v1/qa-exam/transfer 
+ path_url=/v1/qa-exam/transfer 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate, br', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '134', 'Content-Type': 'application/json'} 
+ body=b'{"amount": 100.1, "sendingAccount": "[[]RS]SIRSTS[NTSRGITG[RGSN", "receivingAccount": "0987654321", "receivingBankCode": "CODEVIR999"}' 
+ </msg>
+<msg timestamp="20231217 22:40:11.872" level="INFO">POST Response : url=http://localhost:8080/v1/qa-exam/transfer 
+ status=200, reason=OK 
+ headers={'Content-Type': 'application/json', 'Connection': 'close', 'Date': 'Sun, 17 Dec 2023 15:40:11 GMT', 'Transfer-Encoding': 'chunked'} 
+ body={
+    "data": {
+        "amount": 100.1,
+        "sendingAccountNo": "1234567890",
+        "receivingAccountNo": "0987654321",
+        "receivingBankCode": "CODEVIR999",
+        "transactionDateTime": "2023-04-24T07:59:00.873527286Z",
+        "transferReferenceID": "XXX123"
+    }
+} 
+ </msg>
+<msg timestamp="20231217 22:40:11.872" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20231217 22:40:11.864" endtime="20231217 22:40:11.872"/>
+</kw>
+<msg timestamp="20231217 22:40:11.872" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20231217 22:40:11.863" endtime="20231217 22:40:11.872"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${amount}</var>
+<arg>${payload}</arg>
+<arg>$.amount</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20231217 22:40:11.893" level="INFO">${amount} = [100.1]</msg>
+<status status="PASS" starttime="20231217 22:40:11.873" endtime="20231217 22:40:11.893"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${receivingAccount}</var>
+<arg>${payload}</arg>
+<arg>$.receivingAccount</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20231217 22:40:11.915" level="INFO">${receivingAccount} = ['0987654321']</msg>
+<status status="PASS" starttime="20231217 22:40:11.894" endtime="20231217 22:40:11.916"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${receivingBankCode}</var>
+<arg>${payload}</arg>
+<arg>$.receivingBankCode</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20231217 22:40:11.944" level="INFO">${receivingBankCode} = ['CODEVIR999']</msg>
+<status status="PASS" starttime="20231217 22:40:11.916" endtime="20231217 22:40:11.944"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20231217 22:40:11.945" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20231217 22:40:11.945" endtime="20231217 22:40:11.945"/>
+</kw>
+<kw name="Should Be True" library="BuiltIn">
+<arg>"${response.elapsed.total_seconds()}" &lt; "0.3000"</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" starttime="20231217 22:40:11.946" endtime="20231217 22:40:11.946"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.json()['data']['amount']}</arg>
+<arg>${amount[0]}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20231217 22:40:11.947" endtime="20231217 22:40:11.948"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.json()['data']['receivingAccountNo']}</arg>
+<arg>${receivingAccount[0]}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20231217 22:40:11.949" endtime="20231217 22:40:11.950"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${response.json()['data']['receivingBankCode']}</arg>
+<arg>${receivingBankCode[0]}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20231217 22:40:11.951" endtime="20231217 22:40:11.952"/>
+</kw>
+<doc>success response and http status code 200</doc>
+<tag>regressiontest</tag>
+<tag>robot:continue-on-failure</tag>
+<tag>TC31</tag>
+<status status="PASS" starttime="20231217 22:40:11.843" endtime="20231217 22:40:11.953"/>
+</test>
+<status status="PASS" starttime="20231217 22:40:10.797" endtime="20231217 22:40:11.955"/>
+</suite>
+<statistics>
+<total>
+<stat pass="6" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="0" skip="0">happycase</stat>
+<stat pass="6" fail="0" skip="0">regressiontest</stat>
+<stat pass="1" fail="0" skip="0">TC15</stat>
+<stat pass="1" fail="0" skip="0">TC28</stat>
+<stat pass="1" fail="0" skip="0">TC31</stat>
+<stat pass="1" fail="0" skip="0">TC8</stat>
+<stat pass="1" fail="0" skip="0">TC9</stat>
+</tag>
+<suite>
+<stat pass="6" fail="0" skip="0" id="s1" name="API1 transfer amount">API1 transfer amount</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

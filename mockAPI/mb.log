@@ -1,0 +1,10 @@
+{"level":"info","message":"[mb:2525] mountebank v2.9.1 now taking orders - point your browser to http://localhost:2525/ for help","timestamp":"2023-12-17T15:40:09.638Z"}
+{"level":"warn","message":"[mb:2525] Running with --allowInjection set. See http://localhost:2525/docs/security for security info","timestamp":"2023-12-17T15:40:09.623Z"}
+{"level":"info","message":"[mb:2525] PUT /imposters","timestamp":"2023-12-17T15:40:09.948Z"}
+{"level":"info","message":"[http:8080 exam_QA] Open for business...","timestamp":"2023-12-17T15:40:09.956Z"}
+{"level":"info","message":"[http:8080 exam_QA] ::1:55569 => POST /v1/qa-exam/transfer","timestamp":"2023-12-17T15:40:11.516Z"}
+{"level":"info","message":"[http:8080 exam_QA] ::1:55570 => POST /v1/qa-exam/transfer","timestamp":"2023-12-17T15:40:11.638Z"}
+{"level":"info","message":"[http:8080 exam_QA] ::1:55571 => POST /v1/qa-exam/transfer","timestamp":"2023-12-17T15:40:11.671Z"}
+{"level":"info","message":"[http:8080 exam_QA] ::1:55572 => POST /v1/qa-exam/transfer","timestamp":"2023-12-17T15:40:11.731Z"}
+{"level":"info","message":"[http:8080 exam_QA] ::1:55573 => POST /v1/qa-exam/transfer","timestamp":"2023-12-17T15:40:11.836Z"}
+{"level":"info","message":"[http:8080 exam_QA] ::1:55574 => POST /v1/qa-exam/transfer","timestamp":"2023-12-17T15:40:11.868Z"}

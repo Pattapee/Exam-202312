@@ -1,0 +1,6 @@
+{
+  "amount": 100.1,
+  "sendingAccount": "1234567890",
+  "receivingAccount": "0987654321",
+  "receivingBankCode": "CODEVIR999"
+}

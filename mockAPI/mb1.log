@@ -1,0 +1,43 @@
+{"level":"warn","message":"[mb:2525] Running with --allowInjection set. See http://localhost:2525/docs/security for security info","timestamp":"2023-12-17T14:42:11.973Z"}
+{"level":"info","message":"[mb:2525] mountebank v2.9.1 now taking orders - point your browser to http://localhost:2525/ for help","timestamp":"2023-12-17T14:42:11.987Z"}
+{"level":"info","message":"[mb:2525] PUT /imposters","timestamp":"2023-12-17T14:42:12.138Z"}
+{"level":"info","message":"[http:8080 exam_QA] Open for business...","timestamp":"2023-12-17T14:42:12.147Z"}
+{"level":"info","message":"[http:8080 exam_QA] ::1:49691 => POST /v1/qa-exam/transfer","timestamp":"2023-12-17T14:42:13.673Z"}
+{"level":"info","message":"[http:8080 exam_QA] ::1:54368 => POST /v1/qa-exam/transfer","timestamp":"2023-12-17T15:21:44.379Z"}
+{"level":"info","message":"[http:8080 exam_QA] ::1:54369 => POST /v1/qa-exam/transfer","timestamp":"2023-12-17T15:21:44.532Z"}
+{"level":"info","message":"[http:8080 exam_QA] ::1:54370 => POST /v1/qa-exam/transfer","timestamp":"2023-12-17T15:21:44.564Z"}
+{"level":"info","message":"[http:8080 exam_QA] ::1:54371 => POST /v1/qa-exam/transfer","timestamp":"2023-12-17T15:21:44.601Z"}
+{"level":"info","message":"[http:8080 exam_QA] ::1:54372 => POST /v1/qa-exam/transfer","timestamp":"2023-12-17T15:21:44.710Z"}
+{"level":"info","message":"[http:8080 exam_QA] ::1:54373 => POST /v1/qa-exam/transfer","timestamp":"2023-12-17T15:21:44.740Z"}
+{"level":"info","message":"[http:8080 exam_QA] ::1:54380 => POST /v1/qa-exam/transfer","timestamp":"2023-12-17T15:21:58.959Z"}
+{"level":"info","message":"[http:8080 exam_QA] ::1:54381 => POST /v1/qa-exam/transfer","timestamp":"2023-12-17T15:21:59.078Z"}
+{"level":"info","message":"[http:8080 exam_QA] ::1:54382 => POST /v1/qa-exam/transfer","timestamp":"2023-12-17T15:21:59.111Z"}
+{"level":"info","message":"[http:8080 exam_QA] ::1:54383 => POST /v1/qa-exam/transfer","timestamp":"2023-12-17T15:21:59.142Z"}
+{"level":"info","message":"[http:8080 exam_QA] ::1:54384 => POST /v1/qa-exam/transfer","timestamp":"2023-12-17T15:21:59.244Z"}
+{"level":"info","message":"[http:8080 exam_QA] ::1:54385 => POST /v1/qa-exam/transfer","timestamp":"2023-12-17T15:21:59.295Z"}
+{"level":"info","message":"[http:8080 exam_QA] ::1:54666 => POST /v1/qa-exam/transfer","timestamp":"2023-12-17T15:27:41.035Z"}
+{"level":"info","message":"[http:8080 exam_QA] ::1:55473 => POST /v1/qa-exam/transfer","timestamp":"2023-12-17T15:36:56.432Z"}
+{"level":"info","message":"[http:8080 exam_QA] ::1:55474 => POST /v1/qa-exam/transfer","timestamp":"2023-12-17T15:36:56.538Z"}
+{"level":"info","message":"[http:8080 exam_QA] ::1:55475 => POST /v1/qa-exam/transfer","timestamp":"2023-12-17T15:36:56.570Z"}
+{"level":"info","message":"[http:8080 exam_QA] ::1:55476 => POST /v1/qa-exam/transfer","timestamp":"2023-12-17T15:36:56.604Z"}
+{"level":"info","message":"[http:8080 exam_QA] ::1:55477 => POST /v1/qa-exam/transfer","timestamp":"2023-12-17T15:36:56.750Z"}
+{"level":"info","message":"[http:8080 exam_QA] ::1:55478 => POST /v1/qa-exam/transfer","timestamp":"2023-12-17T15:36:56.806Z"}
+{"level":"info","message":"[http:8080 exam_QA] ::1:55491 => POST /v1/qa-exam/transfer","timestamp":"2023-12-17T15:37:52.083Z"}
+{"level":"info","message":"[http:8080 exam_QA] ::1:55492 => POST /v1/qa-exam/transfer","timestamp":"2023-12-17T15:37:52.200Z"}
+{"level":"info","message":"[http:8080 exam_QA] ::1:55493 => POST /v1/qa-exam/transfer","timestamp":"2023-12-17T15:37:52.231Z"}
+{"level":"info","message":"[http:8080 exam_QA] ::1:55494 => POST /v1/qa-exam/transfer","timestamp":"2023-12-17T15:37:52.263Z"}
+{"level":"info","message":"[http:8080 exam_QA] ::1:55495 => POST /v1/qa-exam/transfer","timestamp":"2023-12-17T15:37:52.380Z"}
+{"level":"info","message":"[http:8080 exam_QA] ::1:55496 => POST /v1/qa-exam/transfer","timestamp":"2023-12-17T15:37:52.413Z"}
+{"level":"info","message":"[http:8080 exam_QA] ::1:55508 => POST /v1/qa-exam/transfer","timestamp":"2023-12-17T15:38:00.314Z"}
+{"level":"info","message":"[http:8080 exam_QA] ::1:55509 => POST /v1/qa-exam/transfer","timestamp":"2023-12-17T15:38:00.419Z"}
+{"level":"info","message":"[http:8080 exam_QA] ::1:55510 => POST /v1/qa-exam/transfer","timestamp":"2023-12-17T15:38:00.451Z"}
+{"level":"info","message":"[http:8080 exam_QA] ::1:55511 => POST /v1/qa-exam/transfer","timestamp":"2023-12-17T15:38:00.482Z"}
+{"level":"info","message":"[http:8080 exam_QA] ::1:55512 => POST /v1/qa-exam/transfer","timestamp":"2023-12-17T15:38:00.584Z"}
+{"level":"info","message":"[http:8080 exam_QA] ::1:55513 => POST /v1/qa-exam/transfer","timestamp":"2023-12-17T15:38:00.615Z"}
+{"level":"info","message":"[http:8080 exam_QA] ::1:55553 => POST /v1/qa-exam/transfer","timestamp":"2023-12-17T15:39:57.393Z"}
+{"level":"info","message":"[http:8080 exam_QA] ::1:55554 => POST /v1/qa-exam/transfer","timestamp":"2023-12-17T15:39:57.523Z"}
+{"level":"info","message":"[http:8080 exam_QA] ::1:55555 => POST /v1/qa-exam/transfer","timestamp":"2023-12-17T15:39:57.551Z"}
+{"level":"info","message":"[http:8080 exam_QA] ::1:55556 => POST /v1/qa-exam/transfer","timestamp":"2023-12-17T15:39:57.584Z"}
+{"level":"info","message":"[http:8080 exam_QA] ::1:55557 => POST /v1/qa-exam/transfer","timestamp":"2023-12-17T15:39:57.689Z"}
+{"level":"info","message":"[http:8080 exam_QA] ::1:55558 => POST /v1/qa-exam/transfer","timestamp":"2023-12-17T15:39:57.740Z"}
+{"level":"info","message":"[mb:2525] Adios - see you soon?","timestamp":"2023-12-17T15:40:04.955Z"}

@@ -1,0 +1,8 @@
+pymysql
+pandas
+robotframework
+robotframework-jsonlibrary
+robotframework-pythonlibcore
+robotframework-requests
+robotframework-selenium2library
+robotframework-seleniumlibrary
