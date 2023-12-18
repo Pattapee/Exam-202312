@@ -8,3 +8,4 @@
 {"level":"info","message":"[http:8080 exam_QA] ::1:55572 => POST /v1/qa-exam/transfer","timestamp":"2023-12-17T15:40:11.731Z"}
 {"level":"info","message":"[http:8080 exam_QA] ::1:55573 => POST /v1/qa-exam/transfer","timestamp":"2023-12-17T15:40:11.836Z"}
 {"level":"info","message":"[http:8080 exam_QA] ::1:55574 => POST /v1/qa-exam/transfer","timestamp":"2023-12-17T15:40:11.868Z"}
+{"level":"error","message":"[mb:2525] ::1:55643 transmission error X=> {\"code\":\"ERR_HTTP_REQUEST_TIMEOUT\"}","timestamp":"2023-12-17T15:42:39.688Z"}
